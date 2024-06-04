@@ -117,7 +117,7 @@ export function contentContextInit(callbackCommandMap) {
 
 export function pageContextInit() {
   if (window.chrome !== undefined && window.chrome?.runtime) {
-    throw new Error("Invalid context execution");
+    // throw new Error("Invalid context execution");
   }
 
   if (!document.documentElement.dataset[DATASET_NAME]) {

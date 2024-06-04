@@ -1351,6 +1351,7 @@ const MAX_CRAWLERS_PER_MINE = 8;
 
 class OGInfinity {
   constructor() {
+    window.OGI = this;
     this.commander = document.querySelector("#officers > a.commander.on") !== null;
     this.rawURL = new URL(window.location.href);
     this.page = this.rawURL.searchParams.get("component") || this.rawURL.searchParams.get("page");
@@ -1540,6 +1541,7 @@ class OGInfinity {
     document.querySelector("#pageContent").style.width = "1200px";
     this.listenKeyboard();
     this.sideOptions();
+    this.extraTweaks();
     this.minesLevel();
     this.resourceDetail();
     wait.waitForQuerySelector("#eventContent").then(() => this.eventBox());
@@ -1611,6 +1613,20 @@ class OGInfinity {
     /*Fix banner styles for messages, premium and shop page*/
     if (this.page == "messages" || this.page == "premium" || this.page == "shop")
       document.querySelector("#banner_skyscraper").classList.add("fix-banner");
+  }
+
+  extraTweaks() {
+    var el;
+    el = document.querySelector('[data-ipi-hint="ipiToolbarOfficers"]');
+    el.parentElement.style.display = 'none';
+    el = document.querySelector('[data-ipi-hint="ipiToolbarShop"]');
+    el.parentElement.style.display = 'none';
+    el = document.getElementById('siteFooter');
+    el.style.display = 'none';
+    el = document.getElementById('chatbarcomponent');
+    el.style.display = 'none';
+    el = document.querySelector('.adviceWrapper');
+    el.style.display = 'none';
   }
 
   // remove when complete removal of direct probin in stalks and target list or GF start to wake up
@@ -3579,6 +3595,15 @@ class OGInfinity {
       this.addGalaxyTooltips();
       this.highlightTarget();
       this.scan();
+
+      var el;
+      el = document.getElementsByClassName("cellPlanetName");
+      for (var i = 0; i < el.length; i++) { el[i].style.display = "none"; }
+
+      el = document.querySelector(".expeditionDebrisSlotBox");
+      el = el.firstElementChild.firstElementChild;
+      el.style.display = "none"
+
     };
 
     // let inter = setInterval(() => {
@@ -3619,11 +3644,14 @@ class OGInfinity {
       callback(galaxy, system);
     };
 
+    callback(galaxy, system);
+    for (var t of [0, 100, 300, 500]) {
     setTimeout(function () {
       if (!document.querySelector(".ogl-colors")) {
         callback(galaxy, system);
       }
-    }, 500);
+    }, t);
+    }
   }
 
   addGalaxyMarkers() {
@@ -12613,9 +12641,9 @@ class OGInfinity {
     let plaspy = panel.appendChild(createDOM("button", { class: "icon_eye" }));
     let plaFleet = panel.appendChild(createDOM("div", { class: "ogl-atk" }));
     plaspy.addEventListener("click", (e) => {
-      // sendShipsWithPopup(6, coords[0], coords[1], coords[2], 0, this.json.spyProbes);
+      sendShipsWithPopup(6, coords[0], coords[1], coords[2], 0, this.json.spyProbes);
       // disable direct probing in stalks and target list until complete removal or GF start to wake up
-      this.probingWarning();
+      // this.probingWarning();
       e.stopPropagation();
     });
     plaFleet.addEventListener("click", (e) => {
@@ -12641,9 +12669,9 @@ class OGInfinity {
     plaFleet = panel.appendChild(createDOM("div", { class: "ogl-atk" }));
     plaspy = panel.appendChild(createDOM("button", { class: "icon_eye" }));
     plaspy.addEventListener("click", (e) => {
-      // sendShipsWithPopup(6, coords[0], coords[1], coords[2], 3, this.json.spyProbes);
+      sendShipsWithPopup(6, coords[0], coords[1], coords[2], 3, this.json.spyProbes);
       // disable direct probing in stalks and target list until complete removal or GF start to wake up
-      this.probingWarning();
+      // this.probingWarning();
       e.stopPropagation();
     });
     plaFleet.addEventListener("click", (e) => {

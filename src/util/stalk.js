@@ -341,12 +341,12 @@ export function update(planets) {
     let panel = planetDiv.appendChild(createDOM("div", { class: "ogl-planet-hover" }));
     let plaspy = panel.appendChild(createDOM("button", { class: "icon_eye" }));
 
-    /*    plaspy.addEventListener("click", (e) => {
-      // sendShipsWithPopup(6, coords[0], coords[1], coords[2], 0, json.spyProbes);
+    plaspy.addEventListener("click", (e) => {
+      sendShipsWithPopup(6, coords[0], coords[1], coords[2], 0, OGI.json.spyProbes);
       // disable direct probing in stalks and target list until complete removal or GF start to wake up
-      this.probingWarning();
+      // this.probingWarning();
       e.stopPropagation();
-    }); */
+    });
 
     planetDiv.appendChild(createDOM("div", { class: "ogl-planet-act" }));
     a.appendChild(createDOM("span", {}, planet.coords));
@@ -369,12 +369,12 @@ export function update(planets) {
     panel = moonDiv.appendChild(createDOM("div", { class: "ogl-moon-hover" }));
     plaspy = panel.appendChild(createDOM("button", { class: "icon_eye" }));
 
-    /*    plaspy.addEventListener("click", (e) => {
-      // sendShipsWithPopup(6, coords[0], coords[1], coords[2], 3, json.spyProbes);
+    plaspy.addEventListener("click", (e) => {
+      sendShipsWithPopup(6, coords[0], coords[1], coords[2], 3, OGI.json.spyProbes);
       // disable direct probing in stalks and target list until complete removal or GF start to wake up
-      this.probingWarning();
+      // this.probingWarning();
       e.stopPropagation();
-    }); */
+    });
 
     a.addEventListener("click", (event) => {
       if (document.getElementById("galaxyLoading") && window.getComputedStyle(document.getElementById("galaxyLoading")).display !== "none") return;
